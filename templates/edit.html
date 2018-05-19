@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    
+    <title></title>
+  </head>
+  <body>
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <label>Название</label><br>
+            <input type="text" name="top_name" value="{{top.top_name}}" />
+        </div>
+        <div>
+            <label>Начальное значение</label><br>
+            <input type="number" name="top_value" value="{{top.top_value}}" />
+        </div>
+        <input type="submit" value="Сохранить" >
+    </form>
+  </body>
+</html>
