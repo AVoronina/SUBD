@@ -4,58 +4,26 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="{% static "css/style.css" %}" />
-    <title>Welcome!</title>
+    <title>Forecast</title>
   </head>
   <body>
-    <form method="POST" action="create/">
-        {% csrf_token %}
-        <div>
-          <label>Название вершины</label>
-          <input type="text" name="top_name"/>
-        </div>
-        <div>
-          <label>Начальное значение</label>
-          <input type="number" name="top_value"/>
-        </div>
-        <input type="submit" value="Send">
-    </form>
-    {% if tops.count > 0 %}
-      <h3>Вершины</h3>
-      <table>
-          <tr><th>Название</th><th>Начальное значение</th></tr>
-          {% for top in tops %}
-          <tr>
-            <td>{{ top.top_name }}</td>
-            <td>{{ top.top_value }}</td>
-            <td><a href="edit/{{top.id}}">Изменить</a> | <a href="delete/{{top.id}}">Удалить</a></td>
-          </tr>
-          {% endfor %}
-      </table>
-      <h3>Ввод матрицы весов</h3>
-      <table>
-        <tr>
-          <th>Название</th>
-          {% for top in tops %}
-          <th>{{ top.top_name }}</th>
-          {% endfor %}
-        </tr>
-        {% for top in tops %}
-        <tr>
-          <td>{{ top.top_name }}</td><td><input type="text" name="top_weight"/></td>
-        </tr>
-        {% endfor %}
-      </table>
-    {% endif %}
-
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       <input type="file" name="myfile">
-      <button type="submit">Upload file</button>
+      <p><input type="checkbox" name="option" value="1">Наивный Байес</p>
+      <p><input type="checkbox" name="option" value="0">Случайный лес</p>
+      <button type="submit">Прогнозирование</button>
     </form>
-
     {% if uploaded_file_url %}
-      <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+      <p>Файл успешно загружен</p>
+      {% if option == '0' %}
+        <p>Случайный лес</p>
+        <img src="{% static "img/forecast1.png" %}">
+      {% endif %}
+      {% if option == '1' %}
+        <p>Наивный Байес</p>
+        <img src="{% static "img/forecast2.png" %}">
+      {% endif %}
     {% endif %}
-
   </body>
 </html>
