@@ -15,21 +15,19 @@ x_train = []
 x_test = []
 date = []
 date_output = []
-cost_output = []
 
 def read_file(filename):
-    revenue = []
-    crop = []
-    temp = []
-    cost = []
-    cost_train = []
-    cost_test = []
-    x = []
-    x_train = []
-    x_test = []
-    date = []
-    date_output = []
-    cost_output = []
+    x_train.clear()
+    x.clear()
+    x_test.clear()
+    revenue.clear()
+    crop.clear()
+    temp.clear()
+    cost.clear()
+    cost_train.clear()
+    cost_test.clear()
+    date.clear()
+    date_output.clear()
     path = 'D:/virtualenv/django/myenv' + filename
     with codecs.open(path, 'r', 'utf-8') as file:
         reader = csv.reader(file, delimiter = ',')
@@ -62,7 +60,7 @@ def read_file(filename):
         index += 1
 
 def predicts_forest():
-    model =  RandomForestRegressor(n_estimators=500, oob_score=True, n_jobs=-1, random_state=1)
+    model =  RandomForestRegressor(n_estimators=500, oob_score=True, random_state=1)
     model.fit(x_train, cost_train)
     return model.predict(x_test)
 
