@@ -1,7 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-# from .models import Document
-# from .form import DocumentForm
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 import csv
@@ -19,7 +17,6 @@ def upload_file(request):
         filename = fs.save(myfile.name, myfile)
         uploaded_file_url = fs.url(filename)
         option = request.POST.get('option')
-        print(option)
         read_file(uploaded_file_url)
         if option == '0':
             predict_cost = list(predicts_forest())
@@ -43,8 +40,5 @@ def graph(X, Y1, Y2, option):
     plt.ylabel(u'Стоимость')
     plt.legend((line1, line2), (u'Рельная стоимость', u'Спрогнозированная стоимость'), loc = 'best')
     plt.grid()
-    if option == '0':
-        plt.savefig('D:/virtualenv/django/myenv/static/img/forecast1.png', format = 'png')
-    else:
-        plt.savefig('D:/virtualenv/django/myenv/static/img/forecast2.png', format = 'png')
+    plt.savefig('D:/virtualenv/django/myenv/static/img/forecast.png', format = 'png')
     plt.clf()

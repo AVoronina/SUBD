@@ -1,4 +1,9 @@
-form {
+body {
   font-family: Verdana;
-  /* background-color: blue; */
+}
+
+form {
+  background-color: #C1BCB4;
+  border-radius: 5px;
+  margin: 5px;
 }

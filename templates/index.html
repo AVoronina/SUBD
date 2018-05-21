@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="{% static "css/style.css" %}" />
-    <title>Forecast</title>
+    <title>Forecast Voronina IVT-363</title>
   </head>
   <body>
     <form method="post" enctype="multipart/form-data">
@@ -18,12 +18,11 @@
       <p>Файл успешно загружен</p>
       {% if option == '0' %}
         <p>Случайный лес</p>
-        <img src="{% static "img/forecast1.png" %}">
       {% endif %}
       {% if option == '1' %}
         <p>Наивный Байес</p>
-        <img src="{% static "img/forecast2.png" %}">
       {% endif %}
+      <img src="{% static "img/forecast.png" %}">
     {% endif %}
   </body>
 </html>
