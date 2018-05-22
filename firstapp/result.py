@@ -3,6 +3,7 @@ import codecs
 from sklearn.ensemble import RandomForestRegressor
 import numpy as np
 from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import mean_absolute_error
 
 revenue = []
 crop = []
@@ -15,6 +16,8 @@ x_train = []
 x_test = []
 date = []
 date_output = []
+crop_output = []
+temp_output = []
 
 def read_file(filename):
     x_train.clear()
@@ -28,6 +31,8 @@ def read_file(filename):
     cost_test.clear()
     date.clear()
     date_output.clear()
+    crop_output.clear()
+    temp_output.clear()
     path = 'D:/virtualenv/django/myenv' + filename
     with codecs.open(path, 'r', 'utf-8') as file:
         reader = csv.reader(file, delimiter = ',')
@@ -51,6 +56,8 @@ def read_file(filename):
     while index < len(revenue):
         buf = []
         date_output.append(date[index])
+        crop_output.append(crop[index])
+        temp_output.append(temp[index])
         buf.append(revenue[index])
         buf.append(crop[index])
         buf.append(temp[index])
@@ -73,3 +80,12 @@ def get_date():
     return date_output
 def get_fact_cost():
     return cost_test
+
+def mean_absolute_err(cost_test, predict_cost):
+    return mean_absolute_error(cost_test, predict_cost)
+
+def get_crop():
+    return crop_output
+
+def get_temp():
+    return temp_output
