@@ -18,12 +18,13 @@
       <p>Файл успешно загружен</p>
       {% if option == '0' %}
         <p>Случайный лес</p>
-
       {% endif %}
       {% if option == '1' %}
         <p>Наивный Байес</p>
       {% endif %}
       <img src="{% static "img/forecast.png" %}">
+      <p>MAE: {{ err1 }}</p>
+      <img src="{% static "img/forecast1.png" %}">
       <p>MAE: {{ err }}</p>
       <img src="{% static "img/crop.png" %}">
       <img src="{% static "img/temp.png" %}">

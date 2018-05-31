@@ -18,6 +18,7 @@ date = []
 date_output = []
 crop_output = []
 temp_output = []
+date_train = []
 
 def read_file(filename):
     x_train.clear()
@@ -33,6 +34,7 @@ def read_file(filename):
     date_output.clear()
     crop_output.clear()
     temp_output.clear()
+    date_train.clear()
     path = 'D:/virtualenv/django/myenv' + filename
     with codecs.open(path, 'r', 'utf-8') as file:
         reader = csv.reader(file, delimiter = ',')
@@ -46,6 +48,7 @@ def read_file(filename):
     index = 0
     while index < len(revenue) * 0.8:
         buf = []
+        date_train.append(date[index])
         buf.append(revenue[index])
         buf.append(crop[index])
         buf.append(temp[index])
@@ -66,18 +69,19 @@ def read_file(filename):
         cost_test.append(cost[index])
         index += 1
 
-def predicts_forest():
+def predicts_forest(x_test):
     model =  RandomForestRegressor(n_estimators=500, oob_score=True, random_state=1)
     model.fit(x_train, cost_train)
     return model.predict(x_test)
 
-def predits_bayes():
+def predits_bayes(x_test):
     model = GaussianNB()
     model = model.fit(x_train, cost_train)
     return model.predict(x_test)
 
 def get_date():
     return date_output
+
 def get_fact_cost():
     return cost_test
 
@@ -89,3 +93,15 @@ def get_crop():
 
 def get_temp():
     return temp_output
+
+def get_train_data():
+    return x_train
+
+def get_test_data():
+    return x_test
+
+def get_tain_date():
+    return date_train
+
+def get_fact_cost_train():
+    return cost_train
